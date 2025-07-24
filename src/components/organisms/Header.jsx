@@ -1,9 +1,8 @@
 import React from "react";
-import SearchBar from "@/components/molecules/SearchBar";
-import { motion } from "framer-motion";
 import ApperIcon from "@/components/ApperIcon";
+import { motion } from "framer-motion";
 
-const Header = ({ onSearch = () => {} }) => {
+const Header = () => {
   return (
     <motion.header 
       className="bg-white border-b border-gray-100 sticky top-0 z-50 backdrop-blur-sm bg-white/95"
@@ -21,9 +20,6 @@ const Header = ({ onSearch = () => {} }) => {
               <h1 className="text-2xl font-bold text-gradient">FeedFlow</h1>
               <p className="text-sm text-gray-600">Share your thoughts with the world</p>
             </div>
-</div>
-          <div className="mt-4 flex justify-center">
-            <SearchBar onSearch={onSearch} placeholder="Search posts..." />
           </div>
         </div>
       </div>
