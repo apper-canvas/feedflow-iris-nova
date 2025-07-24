@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PostCard from "@/components/molecules/PostCard";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
@@ -6,7 +6,7 @@ import Empty from "@/components/ui/Empty";
 import postService from "@/services/api/postService";
 import { motion } from "framer-motion";
 
-const PostFeed = ({ refreshTrigger }) => {
+const PostFeed = ({ refreshTrigger, searchQuery = "" }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -36,9 +36,38 @@ const PostFeed = ({ refreshTrigger }) => {
   if (error) {
     return <Error message={error} onRetry={loadPosts} />;
   }
+// Filter posts based on search query
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery.trim()) return posts;
+    
+    const query = searchQuery.toLowerCase().trim();
+    return posts.filter(post => 
+      post.content?.toLowerCase().includes(query) ||
+      post.author?.toLowerCase().includes(query)
+    );
+  }, [posts, searchQuery]);
 
   if (posts.length === 0) {
     return <Empty />;
+  }
+
+  if (searchQuery.trim() && filteredPosts.length === 0) {
+    return (
+      <motion.div 
+        className="text-center py-12"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="text-gray-500 mb-4">
+          <svg className="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No posts found</h3>
+          <p className="text-gray-600">No posts match your search for "{searchQuery}"</p>
+        </div>
+      </motion.div>
+    );
   }
 
   return (
@@ -48,7 +77,7 @@ const PostFeed = ({ refreshTrigger }) => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
-      {posts.map((post, index) => (
+      {filteredPosts.map((post, index) => (
         <motion.div
           key={post.Id}
           initial={{ opacity: 0, y: 20 }}

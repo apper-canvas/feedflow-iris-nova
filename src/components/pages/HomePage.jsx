@@ -1,14 +1,18 @@
-import React, { useState } from "react";
-import NewPostForm from "@/components/molecules/NewPostForm";
-import PostFeed from "@/components/organisms/PostFeed";
-import postService from "@/services/api/postService";
+import React, { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import postService from "@/services/api/postService";
+import Header from "@/components/organisms/Header";
+import PostFeed from "@/components/organisms/PostFeed";
+import NewPostForm from "@/components/molecules/NewPostForm";
 
 const HomePage = () => {
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const handleSearch = useCallback((query) => {
+    setSearchQuery(query);
+  }, []);
   const handlePostCreate = async (postData) => {
     try {
       setIsSubmitting(true);
@@ -26,7 +30,7 @@ const HomePage = () => {
     }
   };
 
-  return (
+return (
     <div className="min-h-screen bg-white">
       <main className="max-w-2xl mx-auto px-4 py-6">
         <motion.div 
@@ -35,6 +39,8 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
+          <Header onSearch={handleSearch} />
+          
           <NewPostForm 
             onPostCreate={handlePostCreate}
             isSubmitting={isSubmitting}
@@ -50,7 +56,7 @@ const HomePage = () => {
                 <span className="w-1 h-6 bg-gradient-primary rounded-full"></span>
                 Recent Posts
               </h2>
-              <PostFeed refreshTrigger={refreshTrigger} />
+              <PostFeed refreshTrigger={refreshTrigger} searchQuery={searchQuery} />
             </motion.div>
           </div>
         </motion.div>
