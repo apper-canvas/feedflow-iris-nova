@@ -11,6 +11,16 @@ const PostFeed = ({ refreshTrigger, searchQuery = "" }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Filter posts based on search query - moved here to ensure all hooks are called before any returns
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery.trim()) return posts;
+    
+    const query = searchQuery.toLowerCase().trim();
+    return posts.filter(post => 
+      post.content?.toLowerCase().includes(query) ||
+      post.author?.toLowerCase().includes(query)
+    );
+  }, [posts, searchQuery]);
   const loadPosts = async () => {
     try {
       setError("");
@@ -36,17 +46,7 @@ const PostFeed = ({ refreshTrigger, searchQuery = "" }) => {
   if (error) {
     return <Error message={error} onRetry={loadPosts} />;
   }
-// Filter posts based on search query
-  const filteredPosts = useMemo(() => {
-    if (!searchQuery.trim()) return posts;
-    
-    const query = searchQuery.toLowerCase().trim();
-    return posts.filter(post => 
-      post.content?.toLowerCase().includes(query) ||
-      post.author?.toLowerCase().includes(query)
-    );
-  }, [posts, searchQuery]);
-
+// All hooks are now declared at the top - filteredPosts moved above
   if (posts.length === 0) {
     return <Empty />;
   }
