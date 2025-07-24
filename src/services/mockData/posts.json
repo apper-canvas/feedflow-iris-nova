@@ -1,0 +1,44 @@
+[
+  {
+    "Id": 1,
+    "authorName": "Alex Johnson",
+    "content": "Just launched my first React app! The feeling of seeing your code come to life is incredible. Can't wait to ship more features 🚀",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "likes": 24
+  },
+  {
+    "Id": 2,
+    "authorName": "Sarah Chen",
+    "content": "Morning coffee thoughts: The best debugging happens when you explain your code to a rubber duck. Sometimes the simplest solutions are right in front of us.",
+    "timestamp": "2024-01-15T09:15:00Z",
+    "likes": 18
+  },
+  {
+    "Id": 3,
+    "authorName": "Marcus Williams",
+    "content": "Attending my first tech conference next week! Any tips for making the most out of networking events? I'm excited but also a bit nervous.",
+    "timestamp": "2024-01-15T08:45:00Z",
+    "likes": 12
+  },
+  {
+    "Id": 4,
+    "authorName": "Emily Rodriguez",
+    "content": "Hot take: Documentation is just as important as the code itself. Future you will thank present you for those detailed comments and README files.",
+    "timestamp": "2024-01-14T16:20:00Z",
+    "likes": 35
+  },
+  {
+    "Id": 5,
+    "authorName": "David Kim",
+    "content": "Finished a 5-hour debugging session and the issue was a missing semicolon. Sometimes programming humbles you in the most unexpected ways 😅",
+    "timestamp": "2024-01-14T14:30:00Z",
+    "likes": 42
+  },
+  {
+    "Id": 6,
+    "authorName": "Jessica Taylor",
+    "content": "Learning TypeScript has been a game-changer for my development workflow. The initial learning curve was steep, but the confidence it gives you is worth it.",
+    "timestamp": "2024-01-14T11:10:00Z",
+    "likes": 28
+  }
+]
