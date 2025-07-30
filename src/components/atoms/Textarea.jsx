@@ -1,22 +1,44 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { cn } from "@/utils/cn";
 
-const Textarea = React.forwardRef(({ 
+const TextArea = forwardRef(({ 
   className,
+  label,
+  error,
+  helperText,
   ...props 
 }, ref) => {
   return (
-    <textarea
-      className={cn(
-        "flex min-h-[80px] w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-base placeholder:text-gray-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50 resize-none",
-        className
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          {label}
+        </label>
       )}
-      ref={ref}
-      {...props}
-    />
+      
+      <textarea
+        ref={ref}
+        className={cn(
+          "w-full px-4 py-3 border border-gray-300 rounded-lg resize-none transition-all duration-200",
+          "focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:outline-none",
+          "placeholder:text-gray-400",
+          error && "border-red-300 focus:ring-red-500 focus:border-red-500",
+          className
+        )}
+        {...props}
+      />
+      
+      {error && (
+        <p className="mt-1 text-sm text-red-600">{error}</p>
+      )}
+      
+      {helperText && !error && (
+        <p className="mt-1 text-sm text-gray-500">{helperText}</p>
+      )}
+    </div>
   );
 });
 
-Textarea.displayName = "Textarea";
+TextArea.displayName = "TextArea";
 
-export default Textarea;
+export default TextArea;

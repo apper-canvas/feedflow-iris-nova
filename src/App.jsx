@@ -1,35 +1,46 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Header from "@/components/organisms/Header";
-import HomePage from "@/components/pages/HomePage";
+import { NotificationProvider } from "@/contexts/NotificationContext";
+import Layout from "@/components/pages/Layout";
+import HomeFeed from "@/components/pages/HomeFeed";
+import ExplorePage from "@/components/pages/ExplorePage";
+import ProfilePage from "@/components/pages/ProfilePage";
+import PostDetailPage from "@/components/pages/PostDetailPage";
+import MessagesPage from "@/components/pages/MessagesPage";
+import NotificationsPage from "@/components/pages/NotificationsPage";
 
 function App() {
   return (
-    <div className="min-h-screen bg-white font-inter">
-      <Header />
-      
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-      
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        toastStyle={{
-          fontFamily: 'Inter, system-ui, sans-serif'
-        }}
-        style={{ zIndex: 9999 }}
-      />
-    </div>
+    <BrowserRouter>
+      <NotificationProvider>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomeFeed />} />
+              <Route path="explore" element={<ExplorePage />} />
+              <Route path="messages" element={<MessagesPage />} />
+              <Route path="notifications" element={<NotificationsPage />} />
+              <Route path="profile/:userId" element={<ProfilePage />} />
+              <Route path="post/:postId" element={<PostDetailPage />} />
+            </Route>
+          </Routes>
+          
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            className="z-40"
+          />
+        </div>
+      </NotificationProvider>
+    </BrowserRouter>
   );
 }
 

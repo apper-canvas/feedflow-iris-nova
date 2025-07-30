@@ -6,37 +6,30 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: "#5B21B6",
-        secondary: "#8B5CF6",
-        accent: "#EC4899",
-        surface: "#F9FAFB",
-        error: "#EF4444",
-        warning: "#F59E0B",
-        success: "#10B981",
-        info: "#3B82F6"
-      },
       fontFamily: {
-        'inter': ['Inter', 'system-ui', 'sans-serif']
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
-      backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #5B21B6 0%, #EC4899 100%)',
-        'gradient-surface': 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 100%)',
-      },
-      animation: {
-        'slide-in': 'slideIn 0.3s ease-out',
-        'fade-in': 'fadeIn 0.2s ease-out',
-      },
-      keyframes: {
-        slideIn: {
-          '0%': { transform: 'translateY(-20px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' }
+      colors: {
+        primary: {
+          50: '#f5f3ff',
+          100: '#ede6ff',
+          500: '#8B5CF6',
+          600: '#7C3AED',
+          700: '#6D28D9',
+          800: '#5B21B6',
+          900: '#4C1D95',
         },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
-        }
-      }
+        accent: {
+          500: '#EC4899',
+          600: '#DB2777',
+        },
+        surface: '#F9FAFB',
+      },
+      boxShadow: {
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        'card-hover': '0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+      },
     },
   },
   plugins: [],
