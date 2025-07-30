@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
-import Button from "@/components/atoms/Button";
-import TextArea from "@/components/atoms/TextArea";
-import Avatar from "@/components/atoms/Avatar";
-import ImageUpload from "@/components/molecules/ImageUpload";
-import ApperIcon from "@/components/ApperIcon";
 import userService from "@/services/api/userService";
 import postService from "@/services/api/postService";
+import ApperIcon from "@/components/ApperIcon";
+import ImageUpload from "@/components/molecules/ImageUpload";
+import Textarea from "@/components/atoms/Textarea";
+import Button from "@/components/atoms/Button";
+import Avatar from "@/components/atoms/Avatar";
 
 const CreatePostModal = ({ isOpen, onClose, onPostCreated }) => {
   const [content, setContent] = useState("");
@@ -121,9 +121,8 @@ const CreatePostModal = ({ isOpen, onClose, onPostCreated }) => {
                         </p>
                       </div>
                     </div>
-
-                    {/* Text Content */}
-                    <TextArea
+{/* Text Content */}
+                    <Textarea
                       value={content}
                       onChange={(e) => setContent(e.target.value)}
                       placeholder="What's on your mind?"
@@ -131,7 +130,6 @@ const CreatePostModal = ({ isOpen, onClose, onPostCreated }) => {
                       className="mb-4 border-none resize-none focus:ring-0 p-0 text-lg placeholder:text-gray-400"
                       disabled={isSubmitting}
                     />
-
                     {/* Image Upload */}
                     <ImageUpload
                       onImageSelect={setImagePreview}
