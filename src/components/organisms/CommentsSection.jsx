@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { formatDistanceToNow } from "date-fns";
-import { AnimatePresence, motion } from "framer-motion";
-import { toast } from "react-toastify";
-import userService from "@/services/api/userService";
-import commentService from "@/services/api/commentService";
-import ApperIcon from "@/components/ApperIcon";
-import Textarea from "@/components/atoms/Textarea";
-import Button from "@/components/atoms/Button";
-import Avatar from "@/components/atoms/Avatar";
+import React, { useState, useEffect } from 'react';
+import { formatDistanceToNow } from 'date-fns';
+import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'react-toastify';
+import Avatar from '@/components/atoms/Avatar';
+import Button from '@/components/atoms/Button';
+import TextArea from '@/components/atoms/TextArea';
+import ApperIcon from '@/components/ApperIcon';
+import commentService from '@/services/api/commentService';
+import userService from '@/services/api/userService';
 
 const CommentsSection = ({ postId, currentUser, onCommentAdded }) => {
   const [comments, setComments] = useState([]);
@@ -133,9 +133,9 @@ const CommentsSection = ({ postId, currentUser, onCommentAdded }) => {
             src={currentUser.profilePicture}
             alt={currentUser.displayName}
             size="md"
-/>
+          />
           <div className="flex-1">
-            <Textarea
+            <TextArea
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               onKeyDown={handleKeyPress}
